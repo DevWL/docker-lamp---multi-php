@@ -5,9 +5,11 @@ services:
     environment:
       MYSQL_DATABASE: lamp
       MYSQL_USER: lamp_docker
-      MYSQL_PASSWORD: lamp_docker
+      MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - "./sql:docker-entrypoint-initdb.d"
   www:
     image: php:8.1.12-apache-buster
     volumes:
