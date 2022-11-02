@@ -1,4 +1,5 @@
 <?php
+echo "<a href='http://localhost:82'>php8.2rc5</a> | ";
 echo "<a href='http://localhost:81'>php8.1</a> | ";
 echo "<a href='http://localhost:80'>php8.0</a> | ";
 echo "<a href='http://localhost:74'>php7.4</a> | ";
