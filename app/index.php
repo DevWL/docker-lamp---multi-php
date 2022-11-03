@@ -11,4 +11,18 @@ echo "<a href='http://localhost:56'>php5.6</a><br><br>";
 
 echo "This is index page PHP: " . PHP_VERSION . PHP_EOL . "<br>";
 
+class Post
+{
+    public $name;
+    
+    public function __construct(
+        $title, 
+        $author,
+        $body,
+        $publishedAt
+    ) {}
+}
+
+new Post("News", "Wiktor", "some text", "time");
+
 phpinfo();
