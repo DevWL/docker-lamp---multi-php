@@ -4,35 +4,70 @@ services:
     image: mysql:latest
     environment:
       MYSQL_DATABASE: lamp
-      MYSQL_USER: lamp_docker
+      MYSQL_USER: admin
       MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
       - "./sql:/docker-entrypoint-initdb.d"
-  
-  app-8.2:
-    # image: php:8.2.0RC5-apache-buster
-    build: ./apache/php/php8.2rc5/
+      
+  app-8.1:
+    # image: php:8.1-apache-buster
+    build: ./apache/php/php8.1/
     volumes:
       - "./app:/var/www/html"
-      - "./apache/php/php8.2rc5/php.ini:/etc/php.ini"
+      # - "./apache/php/php8.1/conf.d:/usr/local/etc/php/conf.d"
     ports:
-      - 82:80
-  # app-8.1:
-  #   # image: php:8.1-apache-buster
-  #   build: ./apache/php/php8.1/
+      - 81:80
+    links:
+      - db
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    depends_on:
+      - db
+
+
+
+
+
+
+
+      
+
+  # app-8.2:
+  #   # image: php:8.2.0RC5-apache-buster
+  #   build: ./apache/php/php8.2rc5/
   #   volumes:
   #     - "./app:/var/www/html"
+  #     # - "./apache/php/php8.2rc5/conf.d:/usr/local/etc/php/conf.d"
   #   ports:
-  #     - 81:80
+  #     - 82:80
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
+
   # app-8.0:
   #   # image: php:8.0-apache-buster
   #   build: ./apache/php/php8.0/
   #   volumes:
   #     - "./app:/var/www/html"
+  #     # - "./apache/php/php8.0/conf.d:/usr/local/etc/php/conf.d"
   #   ports:
   #     - 80:80
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
+
   # app-7.4:
   #   # image: php:7.4-apache-buster
   #   build: ./apache/php/php7.4/
@@ -83,3 +118,5 @@ services:
     environment:
       - PMA_HOST=db
       - PMA_PORT=3306
+    depends_on:
+      - db

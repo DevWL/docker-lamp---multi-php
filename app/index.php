@@ -11,10 +11,36 @@ echo "<a href='http://localhost:56'>php5.6</a><br><br>";
 
 echo "This is index page PHP: " . PHP_VERSION . PHP_EOL . "<br>";
 
+$servername = "db";
+$username = "root";
+$password = "root";
+$database = "lamp";
+
+try 
+{
+        $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully";
+        $result = $conn->query('SELECT * FROM news');
+}
+catch(PDOException $e)
+{
+        echo "Connection failed: " . $e->getMessage();
+}
+
+foreach ($result as $key => $value) {
+    echo $value["id"]. "<br>";
+    echo $value["title"]. "<br>";
+    echo $value["body"]. "<br>";
+}
+
+    
+
 class Post
 {
     public $name;
-    
+
     public function __construct(
         $title, 
         $author,
