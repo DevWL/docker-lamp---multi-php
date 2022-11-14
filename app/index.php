@@ -15,25 +15,52 @@ $servername = "db";
 $username = "root";
 $password = "root";
 $database = "lamp";
+$result = NULL;
 
 try 
 {
-        $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
-        $result = $conn->query('SELECT * FROM news');
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+    $result = $conn->query('SELECT * FROM news');
 }
 catch(PDOException $e)
 {
-        echo "Connection failed: " . $e->getMessage();
+    echo "Connection failed: " . $e->getMessage();
 }
 
 foreach ($result as $key => $value) {
+
+    if($value["id"] == 1 || $value["id"] === 1 || $value["id"] <= 1){
+        $x = true;
+    }
+
+    if($value["id"] != 1 || $value["id"] !== 1 || $value["id"] >= 1){
+        $x = false;
+    }
+
+    if($value["id"] <=> 1 || $value["id"] !== 1){
+        $x = false;
+    }
+    
     echo $value["id"]. "<br>";
     echo $value["title"]. "<br>";
     echo $value["body"]. "<br>";
 }
+
+$str = "a";
+$i = 1; 
+
+echo "<br>";
+
+while($str != "aa"){
+    echo $i . " " . $str ." <br>";
+    ++$str;
+    $i++;
+}
+
+echo ++$str; // prints 'b'
 
     
 
