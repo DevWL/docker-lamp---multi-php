@@ -6,7 +6,7 @@ RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
     sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 128M/g' /usr/local/etc/php/php.ini && \
     sed -i 's/max_execution_time = 30/max_execution_time = 240/g' /usr/local/etc/php/php.ini
 
-# Creates aditional ini file in conf.d directory 
+# Install php extensions and creates aditional ini file in conf.d directory example: /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN pecl install xdebug \
 	&& docker-php-ext-enable xdebug
 
